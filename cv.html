@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abel Alarco — CV</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0E1410;
+    color: #C9D1C4;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px;
+  }
+  .site-wrap { width: 100%; max-width: 660px; }
+
+  /* TOPBAR */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4A5C4E;
+    margin-bottom: 12px;
+  }
+  .topbar a { color: #7FBF6E; text-decoration: none; }
+  .topbar a:hover { text-decoration: underline; }
+
+  /* HEADER TILE */
+  .cv-header {
+    background: #131A14;
+    border: 1px solid #4A5C4E;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .name { font-size: 24px; font-weight: bold; color: #E8E6DD; margin-bottom: 6px; line-height: 1.1; }
+  .role { font-size: 11px; color: #9CA89A; line-height: 1.5; margin-bottom: 10px; }
+  .contact-line {
+    font-size: 10px; color: #B8C2B5;
+    border-top: 1px dashed #4A5C4E;
+    padding-top: 10px;
+  }
+  .contact-line a { color: #7FBF6E; text-decoration: none; }
+  .contact-line a:hover { text-decoration: underline; }
+
+  /* DOWNLOAD BUTTON */
+  .download-row { margin: 4px 0 14px; }
+  .download-btn {
+    display: inline-block;
+    background: #1A231C;
+    border: 1px solid #7FBF6E;
+    color: #7FBF6E;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 8px 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .download-btn:hover { background: #24312610; background: #232E25; }
+
+  /* SECTION TILE */
+  .section {
+    background: #131A14;
+    border: 1px solid #4A5C4E;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .section-label {
+    font-size: 9px; color: #7FBF6E;
+    letter-spacing: 0.05em;
+    display: block; margin-bottom: 10px;
+    border-bottom: 1px solid #263326;
+    padding-bottom: 6px;
+  }
+
+  .body-text { font-size: 10.5px; line-height: 1.7; color: #B8C2B5; }
+  .body-text a { color: #7FBF6E; text-decoration: none; }
+  .body-text a:hover { text-decoration: underline; }
+
+  /* ENTRY (education / work item) */
+  .entry { margin-bottom: 14px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-org { font-size: 12px; color: #E8E6DD; font-weight: bold; }
+  .entry-meta { font-size: 9px; color: #7FA88E; }
+  .entry-role { font-size: 10px; color: #9CA89A; font-style: italic; margin: 2px 0 5px; }
+  .entry-desc { font-size: 10px; line-height: 1.6; color: #B8C2B5; }
+  .entry-desc a { color: #7FBF6E; text-decoration: none; }
+  .entry-desc a:hover { text-decoration: underline; }
+  .entry-desc ul { margin: 4px 0 0 16px; }
+  .entry-desc li { margin-bottom: 4px; }
+
+  /* MEDIA / PRESENTATION LIST */
+  .media-item { margin-bottom: 10px; font-size: 10.5px; line-height: 1.55; }
+  .media-item:last-child { margin-bottom: 0; }
+  .media-title { color: #E8E6DD; }
+  .media-item a { color: #7FBF6E; text-decoration: none; word-break: break-all; }
+  .media-item a:hover { text-decoration: underline; }
+  .media-note { font-size: 9.5px; color: #7FA88E; margin-top: 8px; font-style: italic; }
+
+  .pres-item { margin-bottom: 10px; font-size: 10px; line-height: 1.6; color: #B8C2B5; }
+  .pres-item:last-child { margin-bottom: 0; }
+  .pres-item .pt { color: #C9D1C4; font-style: italic; }
+
+  /* SKILLS */
+  .skill-row { margin-bottom: 8px; font-size: 10px; line-height: 1.6; }
+  .skill-row:last-child { margin-bottom: 0; }
+  .skill-cat { color: #7FBF6E; }
+  .skill-val { color: #B8C2B5; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid #4A5C4E;
+    margin-top: 4px;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #5C6B5E;
+    width: 100%;
+    max-width: 660px;
+  }
+  .footer a { color: #5C6B5E; text-decoration: none; }
+  .footer a:hover { color: #7FBF6E; }
+  .lang-toggle {
+    background: none; border: none;
+    color: #5C6B5E;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9px; letter-spacing: 0.06em;
+    cursor: pointer; padding: 0;
+  }
+  .lang-toggle:hover { color: #7FBF6E; }
+
+  /* LANGUAGE TOGGLE MECHANISM */
+  .lang-es { display: none; }
+  body.show-es .lang-en { display: none; }
+  body.show-es .lang-es { display: block; }
+  span.lang-en { display: inline; }
+  span.lang-es { display: none; }
+  body.show-es span.lang-en { display: none; }
+  body.show-es span.lang-es { display: inline; }
+
+  @media (max-width: 520px) {
+    .entry-org { display: block; }
+  }
+</style>
+</head>
+<body>
+<div class="site-wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <span>ABEL_ALARCO / CV</span>
+    <a href="index.html">← <span class="lang-en">HOME</span><span class="lang-es">INICIO</span></a>
+  </div>
+
+  <!-- HEADER -->
+  <div class="cv-header">
+    <div class="name">ABEL ALARCO</div>
+    <div class="role">
+      <span class="lang-en">PhD Researcher · Philosophy of Agriculture · Kyoto University</span>
+      <span class="lang-es">Investigador de doctorado · Filosofía de la Agricultura · Universidad de Kioto</span>
+    </div>
+    <div class="contact-line">
+      <a href="mailto:abel.alarco96@gmail.com">abel.alarco96@gmail.com</a>
+      &nbsp;·&nbsp; <span class="lang-en">Peruvian</span><span class="lang-es">Peruano</span>
+      &nbsp;·&nbsp; <span class="lang-en">Kyoto, Japan</span><span class="lang-es">Kioto, Japón</span>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD -->
+  <div class="download-row">
+    <a class="download-btn lang-en" href="ALARCO_Abel_CV_2026.pdf" download>
+      [ DOWNLOAD FULL CV (.pdf) ]
+    </a>
+    <a class="download-btn lang-es" href="ALARCO_Abel_CV_2026_ES.pdf" download>
+      [ DESCARGAR CV COMPLETO (.pdf) ]
+    </a>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <span class="section-label">[01] <span class="lang-en">SUMMARY</span><span class="lang-es">RESUMEN</span></span>
+    <p class="body-text lang-en">
+      PhD researcher at Kyoto University. Working on the epistemology and methodology of sustainability science, with a critical eye on how research programs promising broad social change are actually delivered. I have spent the past 18 months independently building skills in academic communication through social media. I bring solid qualitative research training, database development skills, strong analytical and writing capacity, working fluency across Spanish, English and basic Japanese, and a track record of initiating and running small self-directed projects — from a graduate wellness initiative in my department to a short-lived agroecological startup in Lima.
+    </p>
+    <p class="body-text lang-es">
+      Investigador de doctorado en la Universidad de Kioto. Trabajo sobre la epistemología y metodología de la ciencia de la sostenibilidad, con una mirada crítica sobre cómo se ejecutan realmente los programas de investigación que prometen grandes cambios sociales. He pasado los últimos 18 meses desarrollando de forma independiente habilidades de comunicación académica a través de redes sociales. Aporto una sólida formación en investigación cualitativa, habilidades de desarrollo de bases de datos, fuerte capacidad analítica y de escritura, fluidez de trabajo en español, inglés y japonés básico, y un historial de iniciar y llevar adelante pequeños proyectos autodirigidos — desde una iniciativa de bienestar para estudiantes de posgrado en mi departamento hasta un breve emprendimiento agroecológico en Lima.
+    </p>
+  </div>
+
+  <!-- MEDIA -->
+  <div class="section">
+    <span class="section-label">[02] <span class="lang-en">SELECTED MEDIA PROJECTS</span><span class="lang-es">PROYECTOS DE MEDIOS SELECCIONADOS</span></span>
+
+    <div class="media-item">
+      <span class="media-title"><span class="lang-en">Video Essay:</span><span class="lang-es">Videoensayo:</span> "Por qué Cuba no puede producir su comida."</span><br>
+      <a href="https://youtu.be/MqxkyCbDFhY" target="_blank">youtu.be/MqxkyCbDFhY</a>
+    </div>
+
+    <div class="media-item">
+      <span class="media-title"><span class="lang-en">Video Essay:</span><span class="lang-es">Videoensayo:</span> "Young scholars under pressure fight back"</span><br>
+      <a href="https://youtu.be/G1r8qS8QEgA" target="_blank">youtu.be/G1r8qS8QEgA</a>
+    </div>
+
+    <div class="media-item">
+      <span class="media-title"><span class="lang-en">Short:</span><span class="lang-es">Short:</span> "Japón tiene un problema con los PhD"</span><br>
+      <a href="https://www.instagram.com/p/DXY5lwJglY1/" target="_blank">instagram.com/p/DXY5lwJglY1</a>
+    </div>
+
+    <div class="media-item">
+      <span class="media-title"><span class="lang-en">Short:</span><span class="lang-es">Short:</span> "How critical can scientists be?"</span><br>
+      <a href="https://www.instagram.com/p/DQuFxt6Aupf/" target="_blank">instagram.com/p/DQuFxt6Aupf</a>
+    </div>
+
+    <div class="media-note">
+      <span class="lang-en">Full production (research, scripting, filming, editing, presentation).</span>
+      <span class="lang-es">Producción completa (investigación, guion, filmación, edición, presentación).</span>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <span class="section-label">[03] <span class="lang-en">EDUCATION</span><span class="lang-es">EDUCACIÓN</span></span>
+
+    <div class="entry">
+      <span class="entry-org"><span class="lang-en">Kyoto University</span><span class="lang-es">Universidad de Kyoto</span></span>
+      <span class="entry-meta"> — <span class="lang-en">Kyoto, Japan</span><span class="lang-es">Kioto, Japón</span> · Oct 2024 – <span class="lang-en">Present</span><span class="lang-es">Presente</span></span>
+      <div class="entry-role"><span class="lang-en">PhD in Natural Resource Economics, Philosophy of Agriculture Lab</span><span class="lang-es">Doctorado en Economía de Recursos Naturales, Laboratorio de Filosofía de la Agricultura</span></div>
+      <div class="entry-desc">
+        <span class="lang-en">My dissertation examines how sustainability researchers — especially in agrifood systems — build novel research approaches to change complex social and ecological systems, and where those approaches succeed or fall short methodologically. Two studies are currently running: an ethnography of a research team working to transform Latin American agrifood systems, and a historical study of BOKU's Institute of Social Ecology in Vienna, tracing how "social ecology" developed as a field. Alongside these, I have developed an original qualitative research method built in Obsidian, integrating grounded theory, audit-trail transparency, and open-data principles — a portable, auditable, source-traceable system for qualitative analysis.</span>
+        <span class="lang-es">Mi tesis examina cómo los investigadores de la sostenibilidad — especialmente en sistemas agroalimentarios — construyen enfoques novedosos de investigación para transformar sistemas sociales y ecológicos complejos, y dónde esos enfoques tienen éxito o fallan metodológicamente. Actualmente desarrollo dos estudios: una etnografía de un equipo de investigación que busca transformar los sistemas agroalimentarios latinoamericanos, y un estudio histórico del Instituto de Ecología Social de BOKU en Viena, rastreando cómo se desarrolló la "ecología social" como campo. Junto a estos, he desarrollado un método original de investigación cualitativa construido en Obsidian, que integra la teoría fundamentada, la transparencia de trazabilidad, y principios de datos abiertos — un sistema portátil, auditable y con trazabilidad de fuentes para el análisis cualitativo.</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <span class="entry-org"><span class="lang-en">University of Vienna</span><span class="lang-es">Universidad de Viena</span></span>
+      <span class="entry-meta"> — <span class="lang-en">Vienna, Austria</span><span class="lang-es">Viena, Austria</span> · Sep – Dec 2025</span>
+      <div class="entry-role"><span class="lang-en">Exchange Semester, Department of Science & Technology Studies</span><span class="lang-es">Semestre de intercambio, Departamento de Estudios de Ciencia y Tecnología</span></div>
+      <div class="entry-desc">
+        <span class="lang-en">Three-month research visit at the University of Vienna and BOKU's Institute of Social Ecology, connected to the dissertation's historical study of the latter institute.</span>
+        <span class="lang-es">Estancia de investigación de tres meses en la Universidad de Viena y el Instituto de Ecología Social de BOKU, vinculada al estudio histórico de dicho instituto en mi tesis.</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <span class="entry-org"><span class="lang-en">Kyoto University</span><span class="lang-es">Universidad de Kyoto</span></span>
+      <span class="entry-meta"> — <span class="lang-en">Kyoto, Japan</span><span class="lang-es">Kioto, Japón</span> · Oct 2022 – Sep 2024</span>
+      <div class="entry-role"><span class="lang-en">Master in Natural Resource Economics, Philosophy of Agriculture Lab</span><span class="lang-es">Maestría en Economía de Recursos Naturales, Laboratorio de Filosofía de la Agricultura</span></div>
+      <div class="entry-desc">
+        <span class="lang-en">Fieldwork visits and interviews with researchers and directors at Europe's eLTER, Malaysia's KITA, Japan's RIHN, the UK's TUKFSP, and Germany's IDOS and ZEF. Built qualitative research skills — semi-structured interviewing, thematic and narrative analysis — for studying organizational, relational and cultural dynamics in boundary-crossing research projects.</span>
+        <span class="lang-es">Visitas de campo y entrevistas con investigadores y directores en el eLTER de Europa, KITA de Malasia, RIHN de Japón, TUKFSP del Reino Unido, e IDOS y ZEF de Alemania. Desarrollé habilidades de investigación cualitativa — entrevistas semiestructuradas, análisis temático y narrativo — para estudiar dinámicas organizacionales, relacionales y culturales en proyectos de investigación que cruzan fronteras disciplinarias.</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <span class="entry-org"><span class="lang-en">Kyoto University</span><span class="lang-es">Universidad de Kyoto</span></span>
+      <span class="entry-meta"> — <span class="lang-en">Kyoto, Japan</span><span class="lang-es">Kioto, Japón</span> · Oct 2021 – Sep 2022</span>
+      <div class="entry-role"><span class="lang-en">Research Preparation Studies ("Kenkyuusei" Position)</span><span class="lang-es">Estudios de preparación para la investigación (posición "Kenkyuusei")</span></div>
+      <div class="entry-desc">
+        <span class="lang-en">Japanese language classes, project conceptualization, and foundational reading on international agricultural politics and economics. Independently proposed and ran a tri-semester "Wellness Sessions" initiative — self-organized workshops directed at the mental wellbeing of laboratory and department members, sustained across three semesters.</span>
+        <span class="lang-es">Clases de japonés, conceptualización del proyecto, y lecturas fundamentales sobre política y economía agrícola internacional. Propuse y dirigí de forma independiente la iniciativa "Sesiones de Bienestar" durante tres semestres — talleres autoorganizados dirigidos al bienestar mental de los miembros del laboratorio y del departamento.</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <span class="entry-org"><span class="lang-en">National University of San Marcos</span><span class="lang-es">Universidad Nacional Mayor de San Marcos</span></span>
+      <span class="entry-meta"> — <span class="lang-en">Lima, Peru</span><span class="lang-es">Lima, Perú</span> · Sep 2021</span>
+      <div class="entry-role"><span class="lang-en">Licenciatura Thesis in Philosophy — Highest Honors</span><span class="lang-es">Tesis de Licenciatura en Filosofía — Máximos Honores</span></div>
+      <div class="entry-desc">
+        <span class="lang-en">Argued that contemporary ethical theories lack sufficient conceptual clarity to communicate meaningfully with one another, and proposed a basic framework for mapping their terminological differences.</span>
+        <span class="lang-es">Argumenté que las teorías éticas contemporáneas carecen de suficiente claridad conceptual para comunicarse de forma significativa entre sí, y propuse un marco básico para mapear sus diferencias terminológicas.</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <span class="entry-org"><span class="lang-en">National University of San Marcos</span><span class="lang-es">Universidad Nacional Mayor de San Marcos</span></span>
+      <span class="entry-meta"> — <span class="lang-en">Lima, Peru</span><span class="lang-es">Lima, Perú</span> · 2013 – 2018</span>
+      <div class="entry-role"><span class="lang-en">Bachelor's Degree in Philosophy — Top of Class</span><span class="lang-es">Licenciatura en Filosofía — Primer puesto de la promoción</span></div>
+    </div>
+  </div>
+
+  <!-- PRESENTATIONS -->
+  <div class="section">
+    <span class="section-label">[04] <span class="lang-en">ACADEMIC PRESENTATIONS</span><span class="lang-es">PRESENTACIONES ACADÉMICAS</span></span>
+
+    <div class="pres-item">
+      <span class="pt">"Refocusing Institutional Priorities: The Role of Educational Structures in Promoting Interdisciplinarity in Agri-Food Research."</span><br>
+      5th Global Food Security Conference, <span class="lang-en">April</span><span class="lang-es">abril</span> 2024, Leuven, <span class="lang-en">Belgium</span><span class="lang-es">Bélgica</span>.
+    </div>
+    <div class="pres-item">
+      <span class="pt">"Exploring AFS Dynamics and The Value of Self-Reflective Research."</span><br>
+      4th Food &amp; Society Conference, <span class="lang-en">November</span><span class="lang-es">noviembre</span> 2023, Kuching (Sarawak), <span class="lang-en">Malaysia</span><span class="lang-es">Malasia</span>.
+    </div>
+    <div class="pres-item">
+      <span class="pt">"The Interdisciplinary Researcher: Probing the Impact of Academic Structures and Scholarly Identity on Agri-Food Sociology."</span><br>
+      7th International Workshop, ARAFE, <span class="lang-en">July</span><span class="lang-es">julio</span> 2023, Ritsumeikan University, OIC Campus.
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <div class="section">
+    <span class="section-label">[05] <span class="lang-en">WORK EXPERIENCE</span><span class="lang-es">EXPERIENCIA LABORAL</span></span>
+
+    <div class="entry">
+      <span class="entry-org">Vegginy</span>
+      <span class="entry-meta"> — <span class="lang-en">Kyoto, Japan</span><span class="lang-es">Kioto, Japón</span> · Aug 2023 – <span class="lang-en">Present</span><span class="lang-es">Presente</span></span>
+      <div class="entry-role"><span class="lang-en">Weekend service & kitchen support staff</span><span class="lang-es">Personal de servicio y apoyo de cocina los fines de semana</span> — <a href="https://www.instagram.com/vegginykyoto/" target="_blank">Instagram</a></div>
+      <div class="entry-desc">
+        <span class="lang-en">Grounded food work. Waiting, preparing food and drinks, and general operations at a popular small Kyoto vegan restaurant.</span>
+        <span class="lang-es">Trabajo con los pies en la tierra. Atención a clientes, preparación de comida y bebidas, y operaciones generales en un pequeño y popular restaurante vegano de Kioto.</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <span class="entry-org"><span class="lang-en">Freelance Research & Editorial Assistant</span><span class="lang-es">Asistente independiente de investigación y editorial</span></span>
+      <span class="entry-meta"> — <span class="lang-en">Lima, Peru / Kyoto, Japan</span><span class="lang-es">Lima, Perú / Kioto, Japón</span> · Nov 2020 – Oct 2021 · Oct 2022 – Feb 2023</span>
+      <div class="entry-desc" style="margin-top:5px;">
+        <ul class="lang-en">
+          <li>Academic administrative tasks, literature reviews and critical feedback for a physician working on a PhD in Philosophy focused on medically assisted death in Peru. (Lima, Peru / Nov 2020 – Oct 2021)</li>
+          <li>Document management and academic administrative procedures for a lawyer's graduate applications in Italy and Canada. (Lima, Peru / Nov 2020 – Oct 2021)</li>
+          <li>Organizational and writing support for the Peruvian disability NGO SODIS during the second phase of the UNICEF-funded <em>+ Inclusión</em> project. (Kyoto, Japan / Oct 2022 – Feb 2023)</li>
+        </ul>
+        <ul class="lang-es">
+          <li>Tareas administrativas académicas, revisiones bibliográficas y retroalimentación crítica para un médico que cursaba un doctorado en Filosofía sobre la muerte médicamente asistida en Perú. (Lima, Perú / nov 2020 – oct 2021)</li>
+          <li>Gestión documental y trámites administrativos académicos para las postulaciones de posgrado de un abogado en Italia y Canadá. (Lima, Perú / nov 2020 – oct 2021)</li>
+          <li>Apoyo organizativo y de redacción para la ONG peruana de discapacidad SODIS durante la segunda fase del proyecto <em>+ Inclusión</em>, financiado por UNICEF. (Kioto, Japón / oct 2022 – feb 2023)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <span class="entry-org">Manía Vegan Food / Tejeda's Company</span>
+      <span class="entry-meta"> — <span class="lang-en">Lima – Trujillo, Peru</span><span class="lang-es">Lima – Trujillo, Perú</span> · Mar – Oct 2020</span>
+      <div class="entry-role"><span class="lang-en">Family food business, sustainability and agroecology support</span><span class="lang-es">Negocio familiar de alimentos, apoyo en sostenibilidad y agroecología</span></div>
+      <div class="entry-desc">
+        <span class="lang-en">Supported the business's shift toward agroecological sourcing, community engagement, and sustainability. Networked with providers and partners, mapped Lima's agroecological business landscape, and secured farmer's-market placements.</span>
+        <span class="lang-es">Apoyé la transición del negocio hacia el abastecimiento agroecológico, la participación comunitaria y la sostenibilidad. Establecí contactos con proveedores y socios, mapeé el panorama de negocios agroecológicos de Lima, y aseguré espacios en distintas ferias de agricultores.</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <span class="entry-org">2/3 orgánico</span>
+      <span class="entry-meta"> — <span class="lang-en">Lima, Peru</span><span class="lang-es">Lima, Perú</span> · Dec 2018 – Dec 2019</span>
+      <div class="entry-role"><span class="lang-en">Co-founder, agroecological weekly veggie box startup</span><span class="lang-es">Cofundador, emprendimiento de cajas semanales de vegetales agroecológicos</span> — <a href="https://www.instagram.com/dosterciosoficial/?hl=es" target="_blank">Instagram</a></div>
+      <div class="entry-desc">
+        <span class="lang-en">Small two-person startup (with a childhood friend) assembling weekly vegetable boxes from regional agroecological farms, curated to meet average weekly micronutrient requirements. Ran for one year.</span>
+        <span class="lang-es">Pequeño emprendimiento de dos personas (con un amigo de la infancia) que armaba cajas semanales de vegetales provenientes de granjas agroecológicas regionales, diseñadas para cubrir los requerimientos semanales promedio de micronutrientes. Funcionó durante un año.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <span class="section-label">[06] <span class="lang-en">SKILLS & LANGUAGES</span><span class="lang-es">HABILIDADES E IDIOMAS</span></span>
+
+    <div class="skill-row">
+      <span class="skill-cat"><span class="lang-en">Research & Analysis:</span><span class="lang-es">Investigación y Análisis:</span></span>
+      <span class="skill-val"><span class="lang-en">Qualitative interviewing, thematic and narrative analysis, narrative synthesis, fact-checking, methodological design (open-data qualitative pipelines), broad scientific literacy including statistics.</span><span class="lang-es">Entrevistas cualitativas, análisis temático y narrativo, síntesis narrativa, verificación de datos, diseño metodológico (flujos cualitativos de datos abiertos), amplia alfabetización científica incluyendo estadística.</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-cat"><span class="lang-en">Media Production:</span><span class="lang-es">Producción de Medios:</span></span>
+      <span class="skill-val"><span class="lang-en">Scriptwriting, story development, interview design, video editing (DaVinci Resolve), on-camera presentation.</span><span class="lang-es">Guion, desarrollo de historias, diseño de entrevistas, edición de video (DaVinci Resolve), presentación frente a cámara.</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-cat"><span class="lang-en">Interpersonal:</span><span class="lang-es">Interpersonales:</span></span>
+      <span class="skill-val"><span class="lang-en">Workshop facilitation, initiative-building, working across languages and academic cultures.</span><span class="lang-es">Facilitación de talleres, creación de iniciativas, trabajo entre distintos idiomas y culturas académicas.</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-cat"><span class="lang-en">Languages:</span><span class="lang-es">Idiomas:</span></span>
+      <span class="skill-val"><span class="lang-en">Spanish (native), English (fluent), Japanese (conversational).</span><span class="lang-es">Español (nativo), inglés (fluido), japonés (conversacional).</span></span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <button class="lang-toggle" onclick="toggleLang()">EN / ES</button>
+  <a href="mailto:abel.alarco96@gmail.com">abel.alarco96@gmail.com</a>
+</div>
+
+<script>
+  function toggleLang() {
+    document.body.classList.toggle('show-es');
+    const isSpanish = document.body.classList.contains('show-es');
+    localStorage.setItem('preferredLang', isSpanish ? 'es' : 'en');
+  }
+
+  // Check for saved language preference on page load
+  window.addEventListener('load', () => {
+    const savedLang = localStorage.getItem('preferredLang');
+    if (savedLang === 'es') {
+      document.body.classList.add('show-es');
+    }
+  });
+</script>
+</body>
+</html>
